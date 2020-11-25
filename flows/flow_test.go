@@ -9,9 +9,10 @@ package flows
 
 import (
 	"context"
+	"testing"
+
 	"github.com/jin-quick/go-flow/pkg/logger"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestFlow_Execute(t *testing.T) {

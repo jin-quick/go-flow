@@ -9,22 +9,26 @@ package flows
 
 import (
 	"context"
+
 	"github.com/jin-quick/go-flow/flows/tasks"
 	"github.com/jin-quick/go-flow/pkg/logger"
 	"go.uber.org/zap"
 )
 
+// Flow フロー
 type Flow struct {
 	root tasks.Task
 
 	tasks []tasks.Task
 }
 
+// Add タスク追加
 func (f *Flow) Add(parentTask, task tasks.Task) {
 	f.tasks = append(f.tasks, task)
 	parentTask.Add(task)
 }
 
+// Execute フローを実行する
 func (f *Flow) Execute(ctx context.Context, data string) error {
 	task := f.root
 
@@ -53,6 +57,7 @@ func (f *Flow) Execute(ctx context.Context, data string) error {
 	return nil
 }
 
+// NewInquirySupportFlow 初期化
 func NewInquirySupportFlow() *Flow {
 	f := &Flow{}
 
