@@ -1,9 +1,7 @@
-name: MainWorkflow
+name: main-ci-cd
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -40,3 +38,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: test
         run: go test ./... -v
+  deploy:
+    needs:
+      - test
+      - lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: build-docker-images
+        run: echo "build-docker-images"

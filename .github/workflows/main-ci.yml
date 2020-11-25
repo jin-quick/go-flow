@@ -1,8 +1,6 @@
-name: MainWorkflow
+name: main-ci
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
