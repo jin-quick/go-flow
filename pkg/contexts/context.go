@@ -9,6 +9,7 @@ package contexts
 
 import (
 	"context"
+
 	"go.uber.org/zap"
 )
 
@@ -18,7 +19,7 @@ const (
 	traceKey contextKey = "trace_key"
 )
 
-// SetTrace トレース情報をcontextに追加する
+// SetTraceFields トレース情報をcontextに追加する
 func SetTraceFields(ctx context.Context, traceID, spanID uint64) context.Context {
 	return context.WithValue(ctx, traceKey, []zap.Field{
 		zap.Uint64("dd.trace_id", traceID),
@@ -26,7 +27,7 @@ func SetTraceFields(ctx context.Context, traceID, spanID uint64) context.Context
 	})
 }
 
-// TraceToFields contextにトレース情報をzap.Field配列へ変換して返却
+// GetTraceFields contextにトレース情報をzap.Field配列へ変換して返却
 func GetTraceFields(ctx context.Context) []zap.Field {
 	t, ok := ctx.Value(traceKey).([]zap.Field)
 	if !ok {
